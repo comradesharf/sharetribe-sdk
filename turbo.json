@@ -1,0 +1,12 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"tasks": {
+		"//:compile": {
+			"inputs": ["typespec"],
+			"outputs": ["tsp-output"]
+		},
+		"//:format-and-lint": {
+			"cache": false
+		}
+	}
+}
