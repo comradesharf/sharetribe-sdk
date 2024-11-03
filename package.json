@@ -3,14 +3,16 @@
 	"packageManager": "yarn@4.4.1",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@typespec/compiler": "latest",
-		"@typespec/http": "latest",
-		"@typespec/openapi": "latest",
-		"@typespec/openapi3": "latest",
-		"@typespec/rest": "latest",
-		"@typespec/versioning": "latest",
+		"@typespec/compiler": "^0.61.2",
+		"@typespec/http": "^0.61.0",
+		"@typespec/openapi": "^0.61.0",
+		"@typespec/openapi3": "^0.61.0",
+		"@typespec/rest": "^0.61.0",
+		"@typespec/versioning": "^0.61.0",
 		"lefthook": "^1.8.2",
-		"turbo": "^2.2.3"
+		"openapi-typescript": "^7.4.2",
+		"turbo": "^2.2.3",
+		"typescript": "^5.6.3"
 	},
 	"peerDependencies": {
 		"@typespec/http": "*",
@@ -19,10 +21,17 @@
 		"@typespec/rest": "*",
 		"@typespec/versioning": "*"
 	},
+	"imports": {
+		"#*": "./src/*"
+	},
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"compile": "tsp compile typespec",
+		"compile:openapi": "tsp compile typespec --output-dir=output",
+		"compile:ts-fetch": "openapi-typescript ./output/@typespec/openapi3/openapi.yaml --output ./src/schema.d.ts",
 		"format-and-lint": "biome check --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true && tsp format tsp format \"typespec/**/*.tsp\""
+	},
+	"dependencies": {
+		"openapi-fetch": "^0.13.0"
 	}
 }

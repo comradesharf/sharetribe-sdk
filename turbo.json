@@ -1,11 +1,16 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"tasks": {
-		"//:compile": {
-			"inputs": ["typespec"],
-			"outputs": ["tsp-output"]
+		"compile:openapi": {
+			"inputs": ["typespec/*.tsp"],
+			"outputs": ["output/@typespec/openapi3/*.yaml"]
 		},
-		"//:format-and-lint": {
+		"compile:ts-fetch": {
+			"inputs": ["output/@typespec/openapi3/*.yaml"],
+			"outputs": ["src/schema.d.ts"],
+			"dependsOn": ["compile:openapi"]
+		},
+		"format-and-lint": {
 			"cache": false
 		}
 	}

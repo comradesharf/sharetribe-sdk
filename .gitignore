@@ -13,5 +13,7 @@
 .pnp.*
 .idea/workspace.xml
 node_modules
-tsp-output
 .turbo
+src/schema.d.ts
+/output
+.env
